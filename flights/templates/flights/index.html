@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block body %}
+        <div class="container-fluid">
+            <h3 class="m-4">All Flights</h3>
+            <div class= "row">
+                <div class="col-12">
+                    {% if flights %}
+                    <div class="card bg-light ms-4 me-4 mb-4">
+                        <div class="card-header">
+                            <i class="fa-solid fa-list fa-lg"></i> Flight records
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                      <tr class= "table-primary">
+                                        <th scope="col">Flight ID</th>
+                                        <th scope="col">Airline</th>
+                                        <th scope="col">Departure Time</th>
+                                        <th scope="col">Arrival Time</th>
+                                        <th scope="col">Service</th>
+                                        <th scope="col">Aircraft ID</th>
+                                        <th scope="col">Route Number</th>
+                                        <th scope="col">ACTION </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for flight in flights%}
+                                        <tr class= "table-light">
+                                            <td> {{flight.flight_id}} </td>
+                                            <td> {{flight.airline_name}} </td>
+                                            <td> {{flight.dep_time}} </td>
+                                            <td> {{flight.arr_time}} </td>
+                                            <td> {{flight.service}} </td>
+                                            <td> {{flight.aircraft_id}} </td>
+                                            <td> {{flight.route_no}} </td>
+                                            <td>
+                                                <button type = "button" class="btn btn-success me-1" href="{% url 'view_flight' flight.flight_id %}" data-bs-toggle="modal" data-bs-target="#myModal{{flight.flight_id}}">
+                                                    <i class="fa-solid fa-circle-info" fa-lg></i>
+                                                </button>
+                                                <div class="modal" id ="myModal{{flight.flight_id}}" tabindex = "-1" aria-labelledby = "myModalLabel1" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">
+                                                            Flight:{{flight.flight_id}} {{flight.airline_name}}
+                                                            </h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"></span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <ul class="list-unstyled">
+                                                                <li> Flight ID: <strong>{{flight.flight_id}}</strong></li>
+                                                                <li> Departure Time: <strong>{{flight.dep_time}}</strong></li>
+                                                                <li> Arrival Time: <strong>{{flight.arr_time}}</strong></li>
+                                                                <li> Service: <strong>{{flight.service}}</strong></li>
+                                                                <li> Aircraft ID: <strong>{{flight.aircraft_id}}</strong></li>
+                                                                <li> Route Number: <strong>{{flight.route_no}}</strong></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                  </table>
+                            </div>
+                          </p>
+                        </div>
+                    </div>
+                    {% else %}
+                        <h5 class="alert alert-primary ms-4 me-4"> No Flight records</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+{% endblock body %}
