@@ -13,5 +13,5 @@ This is a Django based website that targets to control an airline's operations. 
 
 ## Contributors
 
-ISHIKA BANERJEE [@ishika-tia](https://github.com/ishika-tia)
+ISHIKA BANERJEE [@ishika-tia](https://github.com/ishika-tia) </br>
 SUDHANSHU RANJAN [@sudhanshuranjan2002](https://github.com/sudhanshuranjan2002) 
