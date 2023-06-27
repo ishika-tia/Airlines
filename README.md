@@ -1,6 +1,6 @@
 # Airline-Management-System
 
-This is a Django based website that targets to control an airline's operations. This website allows an airline company to manage data like checking and editing flight and passenger status.✨
+This is a Django based website that targets to control an airline's operations. This website allows an airline company to manage data like checking and editing flight and passenger status. The project fetches the backend data from MySQL.✨
 
 ## Setting up this project
 - Make sure Python and pip are installed. Install pip yourself to ensure you have the latest version:
@@ -14,6 +14,20 @@ This is a Django based website that targets to control an airline's operations. 
   <br>```.\env\Scripts\activate```
 - If you want to deactivate the virtual environment, use:
   <br>```deactivate```
+- Run ```pip install django``` to install Django
+- Make a MySQL database using the code given in database.txt
+- Check the settings.py file in the project folder and locate this code:
+  DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'flights',
+        'USER': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'PASSWORD': '1203',
+    }
+}
+Here use your own username, password of MySQL.
 - Run `python manage.py makemigrations` to identify the changes you have made to the database model.
 - Run `python manage.py migrate` to apply migrations.
 - To connect database to MySQL Client run command `pip install mysqlclient`
