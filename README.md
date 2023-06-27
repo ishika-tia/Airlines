@@ -15,18 +15,18 @@ This is a Django based website that targets to control an airline's operations. 
 - If you want to deactivate the virtual environment, use:
   <br>```deactivate```
 - Run ```pip install django``` to install Django
-- Make a MySQL database using the code given in database.txt
-- Check the settings.py file in the project folder and locate this code:
-  DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'flights',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'PASSWORD': '1203',
-    }
-}
+- Make a MySQL database using the code given in *database.txt*
+- Check the settings.py file in the project folder and locate this code:<br>
+  DATABASES = {<br>
+    'default': {<br>
+        'ENGINE': 'django.db.backends.mysql',<br>
+        'NAME': 'flights',<br>
+        'USER': 'root',<br>
+        'HOST': 'localhost',<br>
+        'PORT': '3306',<br>
+        'PASSWORD': '1203',<br>
+    }<br>
+}<br>
 Here use your own username, password of MySQL.
 - Run `python manage.py makemigrations` to identify the changes you have made to the database model.
 - Run `python manage.py migrate` to apply migrations.
