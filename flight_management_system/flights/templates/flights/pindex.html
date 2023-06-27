@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container-fluid">
+    <h3 class="m-4">All Passengers</h3>
+    <div class= "row">
+        <div class="col-12">
+            {% if passengers %}
+            <div class="card bg-light ms-4 me-4 mb-4">
+                <div class="card-header">
+                    <i class="fa-solid fa-list fa-lg"></i> Passenger records
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr class= "table-primary">
+                                <th scope="col">Passenger ID</th>
+                                <th scope="col">Passenger Name</th>
+                                <th scope="col">Flight Name</th>
+                                <th scope="col">Check-In Status</th>
+                                <th scope="col">ACTION </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for passenger in passengers%}
+                                <tr class= "table-light">
+                                    <td> {{passenger.p_id}} </td>
+                                    <td> {{passenger.p_name}} </td>
+                                    <td> {{passenger.flight}} </td>
+                                    <td> {{passenger.checked_in}} </td>
+                                    <td>
+                                        <button type = "button" class="btn btn-success me-1" href="{% url 'view_passenger' passenger.p_id %}" data-bs-toggle="modal" data-bs-target="#myModal{{passenger.p_id}}">
+                                            <i class="fa-solid fa-circle-info" fa-lg></i>
+                                        </button>
+                                        <div class="modal" id ="myModal{{passenger.p_id}}" tabindex = "-1" aria-labelledby = "myModalLabel1" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">
+                                                    Passenger:{{passenger.p_id}} {{passenger.p_name}}
+                                                    </h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"></span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul class="list-unstyled">
+                                                        <li> Passenger ID: <strong>{{passenger.p_id}}</strong></li>
+                                                        <li> Passenger Name: <strong>{{passenger.p_name}}</strong></li>
+                                                        <li> Flight: <strong>{{passenger.flight}}</strong></li>
+                                                        <li> Check In Status: <strong>{{passenger.checked_in}}</strong></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <a class= "btn btn-warning me-1" href="{% url 'editp' passenger.p_id %}">
+                                            <i class="fa-solid fa-pen-to-square fa-lg"></i> 
+                                          </a>
+                                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletep{{passenger.p_id}}">
+                                            <i class="fa-solid fa-trash-can fa-lg"></i>
+                                          </button>
+
+                                        {% comment %} Modal-Delete Flight {% endcomment %}
+                                        <div class="modal" id ="deletep{{passenger.p_id}}" tabindex = "-1" aria-labelledby = "myModalLabel2" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h5 class="modal-title">
+                                                  Passenger:{{passenger.p_id}} {{passenger.p_name}}
+                                                  </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true"></span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <p>Are you sure you want to delete this passenger's information?</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <form action="{% url 'deletep' passenger.p_id %}" method="POST">
+                                                  {% csrf_token %}
+                                                  <input type="submit" class="btn btn-primary" value="Delete">
+                                                </form>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                  </p>
+                </div>
+            </div>
+            {% else %}
+                <h5 class="alert alert-primary ms-4 me-4"> No Passenger records</h5>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock body %}
