@@ -1,0 +1,43 @@
+DROP database flights;
+CREATE database flights;
+use flights;
+
+CREATE TABLE Flight
+(flight_id int primary key,
+airline_name varchar(20),
+dep_time char(5),
+arr_time char(5),
+service varchar(20),
+aircraft_id int,
+route_no int
+);
+
+insert into flight
+values
+(1, 'Indigo', '7:30', '9:30', 'Breakfast', 1, 1),
+(2, 'Air India', '9:30', '11:30', 'Breakfast', 2, 2),
+(3, 'Indigo', '11:30', '13:30', 'Lunch', 1, 3),
+(4, 'Spice Jet', '13:30', '15:30', 'Lunch', 3, 4),
+(5, 'Air India', '15:30', '17:30', 'Snacks', 2, 1),
+(6, 'Vistara', '17:30', '19:30', 'Snacks', 4, 2),
+(7, 'Spice Jet', '19:30', '21:30', 'Dinner', 3, 3),
+(8, 'Vistara','21:30', '23:30', 'Dinner', 4, 4);
+
+CREATE TABLE Passenger
+(p_id int primary key,
+p_name varchar(30),
+flight_id int,
+checked_in varchar(5),
+foreign key (flight_id) references flight(flight_id)
+);
+
+insert into passenger
+values
+(1, 'Simran Sharma', 6 , 'Yes'),
+(2, 'Sayali Borse', 5 , 'Yes'),
+(3, 'Tanishka Sinha', 4 , 'Yes'),
+(4, 'Priya Rathore', 3 , 'No'),
+(5, 'Himanshu Ranjan', 2 , 'No'),
+(6, 'Shashwat Banerjee', 1 , 'Yes'),
+(7, 'Priya Rathore', 7 , 'No'),
+(8, 'Raghavi Chalamalasetti', 8 , 'Yes');
